@@ -3,38 +3,224 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Coleta matinal — Jornal do almoço</title>
+<title>Assuntos do dia — RPC Meio Dia Paraná</title>
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f3; min-height: 100vh; padding: 24px 16px 48px; color: #1a1a1a; }
-.card { background: #fff; border-radius: 16px; padding: 28px 24px; max-width: 520px; margin: 0 auto; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
-.logo { font-size: 13px; font-weight: 600; color: #888; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
-h1 { font-size: 20px; font-weight: 600; margin-bottom: 6px; color: #111; }
-.subtitle { font-size: 13px; color: #888; margin-bottom: 28px; }
-.field { margin-bottom: 20px; }
-label { display: block; font-size: 13px; font-weight: 500; color: #444; margin-bottom: 6px; }
-label .req { color: #e05; margin-left: 2px; }
-label .hint { font-weight: 400; color: #aaa; font-size: 12px; margin-left: 6px; }
-select, input[type="text"], textarea { width: 100%; padding: 11px 14px; border: 1px solid #ddd; border-radius: 10px; font-size: 15px; font-family: inherit; color: #111; background: #fff; appearance: none; -webkit-appearance: none; outline: none; }
-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
-textarea { height: 110px; resize: vertical; line-height: 1.6; }
-.btn { width: 100%; padding: 14px; background: #1a1a1a; color: #fff; border: none; border-radius: 10px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 8px; }
-.btn:hover { background: #333; }
-.btn:disabled { background: #ccc; cursor: not-allowed; }
-.success { display: none; text-align: center; padding: 32px 16px; }
-.success .icon { width: 56px; height: 56px; background: #e8f7ef; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 28px; }
-.success h2 { font-size: 18px; color: #111; margin-bottom: 8px; }
-.success p { font-size: 14px; color: #888; }
-.novo-btn { margin-top: 20px; padding: 10px 20px; background: #f0f0ee; border: none; border-radius: 8px; font-size: 14px; cursor: pointer; color: #444; }
-.error-msg { display: none; background: #fff0f0; color: #c00; border-radius: 8px; padding: 10px 14px; font-size: 13px; margin-top: 12px; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #0057A8;
+    min-height: 100vh;
+    padding: 0 0 48px;
+    color: #1a1a1a;
+  }
+
+  .header {
+    background: #0057A8;
+    padding: 24px 24px 32px;
+    text-align: center;
+  }
+  .logo-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 8px;
+  }
+  .logo-box {
+    background: #fff;
+    border-radius: 10px;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .logo-box img {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+  }
+  .logo-text { text-align: left; }
+  .logo-text .marca {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+  }
+  .logo-text .programa {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+  }
+  .header-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+    margin-top: 4px;
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 20px 20px 0 0;
+    padding: 28px 24px 40px;
+    max-width: 560px;
+    margin: 0 auto;
+    min-height: calc(100vh - 140px);
+  }
+
+  .card-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0057A8;
+    margin-bottom: 4px;
+  }
+  .card-sub {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f0f0ee;
+    line-height: 1.6;
+  }
+
+  .field { margin-bottom: 20px; }
+  label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: #0057A8;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+  }
+  label .req { color: #e05; margin-left: 2px; }
+  label .hint { font-weight: 400; color: #aaa; font-size: 11px; margin-left: 6px; text-transform: none; letter-spacing: 0; }
+
+  select, input[type="text"], textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid #dde3ed;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: inherit;
+    color: #111;
+    background: #f8fafd;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: border-color 0.15s, background 0.15s;
+    outline: none;
+  }
+  select:focus, input[type="text"]:focus, textarea:focus {
+    border-color: #0057A8;
+    background: #fff;
+  }
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%230057A8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-color: #f8fafd;
+    padding-right: 36px;
+    cursor: pointer;
+  }
+  textarea { height: 110px; resize: vertical; line-height: 1.6; }
+
+  .divider {
+    height: 1px;
+    background: #f0f0ee;
+    margin: 8px 0 20px;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 15px;
+    background: #0057A8;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.15s;
+    letter-spacing: 0.02em;
+  }
+  .btn:hover { background: #004490; }
+  .btn:disabled { background: #ccc; cursor: not-allowed; }
+
+  .error-msg {
+    display: none;
+    background: #fff0f0;
+    color: #c00;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    margin-top: 12px;
+  }
+
+  .success {
+    display: none;
+    text-align: center;
+    padding: 40px 16px;
+  }
+  .success .icon {
+    width: 72px; height: 72px;
+    background: #e8f3ff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 32px;
+  }
+  .success h2 { font-size: 20px; font-weight: 700; color: #0057A8; margin-bottom: 8px; }
+  .success p { font-size: 14px; color: #888; line-height: 1.6; }
+  .success .detalhe {
+    background: #f0f6ff;
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin: 16px 0;
+    font-size: 13px;
+    color: #0057A8;
+    text-align: left;
+    line-height: 1.7;
+  }
+  .novo-btn {
+    margin-top: 8px;
+    padding: 10px 24px;
+    background: #f0f6ff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #0057A8;
+    font-weight: 600;
+  }
+  .novo-btn:hover { background: #ddeeff; }
 </style>
 </head>
 <body>
+
+<div class="header">
+  <div class="logo-area">
+    <div class="logo-box">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/RPC_logo_2021.svg/800px-RPC_logo_2021.svg.png" alt="RPC">
+    </div>
+    <div class="logo-text">
+      <div class="marca">RPC</div>
+      <div class="programa">Meio Dia Paraná</div>
+    </div>
+  </div>
+  <div class="header-sub" id="data-hoje"></div>
+</div>
+
 <div class="card">
-  <div class="logo">RPC · Jornal do almoço</div>
-  <h1>Coleta matinal</h1>
-  <p class="subtitle" id="data-hoje"></p>
+  <div class="card-title">Assuntos do dia</div>
+  <div class="card-sub">Preencha os campos abaixo, independentemente do grau de apuração da notícia. Se você está cogitando levar algum assunto ao ar, ele deve estar aqui. No campo "Assunto delicado", explique brevemente o porquê. E, por fim, se você tiver algo a mais para compartilhar, use o campo "Observação".</div>
+
   <div id="form-area">
+
     <div class="field">
       <label>Praça <span class="req">*</span></label>
       <select id="praca">
@@ -48,63 +234,105 @@ textarea { height: 110px; resize: vertical; line-height: 1.6; }
         <option>Guarapuava</option>
       </select>
     </div>
+
+    <div class="divider"></div>
+
     <div class="field">
       <label>Assuntos previstos <span class="req">*</span><span class="hint">um por linha</span></label>
       <textarea id="assuntos" placeholder="Câmara vota projeto de transporte&#10;Acidente na BR-277&#10;Inauguração de UPA"></textarea>
     </div>
+
     <div class="field">
       <label>Principal destaque <span class="req">*</span></label>
       <input type="text" id="destaque" placeholder="O assunto que abre o jornal hoje">
     </div>
+
+    <div class="divider"></div>
+
     <div class="field">
       <label>Assunto delicado<span class="hint">deixe em branco se não houver</span></label>
       <input type="text" id="delicado" placeholder="Ex: denúncia, acidente com vítima fatal...">
     </div>
+
+    <div class="field">
+      <label>Observação<span class="hint">informações adicionais para a coordenação</span></label>
+      <textarea id="observacao" style="height:80px" placeholder="Ex: equipe a caminho, entrevistado confirmado para 10h, imagens chegando..."></textarea>
+    </div>
+
     <button class="btn" id="btn-enviar" onclick="enviar()">Enviar</button>
     <div class="error-msg" id="error-msg">Preencha praça, assuntos e principal destaque.</div>
+
   </div>
+
   <div class="success" id="success-area">
     <div class="icon">✓</div>
-    <h2>Enviado!</h2>
-    <p id="success-texto"></p>
+    <h2>Enviado com sucesso!</h2>
+    <p>Seus assuntos foram registrados para o Meio Dia Paraná de hoje.</p>
+    <div class="detalhe" id="success-detalhe"></div>
     <button class="novo-btn" onclick="novoEnvio()">Corrigir / reenviar</button>
   </div>
+
 </div>
+
 <script>
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyzJHIiIK3QPPpOyoMmkNJXGPaXhF6JYA9BvD8XXXViwBcjiW4adhfDmMvZ6umYUno8MQ/exec';
-const dias = ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'];
-const meses = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
-const now = new Date();
-document.getElementById('data-hoje').textContent = dias[now.getDay()] + ', ' + now.getDate() + ' de ' + meses[now.getMonth()] + ' de ' + now.getFullYear();
-async function enviar() {
-  const praca = document.getElementById('praca').value.trim();
-  const assuntos = document.getElementById('assuntos').value.trim();
-  const destaque = document.getElementById('destaque').value.trim();
-  const delicado = document.getElementById('delicado').value.trim();
-  const erro = document.getElementById('error-msg');
-  if (!praca || !assuntos || !destaque) { erro.style.display = 'block'; return; }
-  erro.style.display = 'none';
-  const btn = document.getElementById('btn-enviar');
-  btn.disabled = true;
-  btn.textContent = 'Enviando...';
-  const payload = { data: now.toLocaleDateString('pt-BR'), hora: now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }), praca, assuntos, destaque, delicado: delicado || '—' };
-  try {
-    await fetch(APPS_SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-  } catch(e) {}
-  document.getElementById('form-area').style.display = 'none';
-  document.getElementById('success-texto').textContent = praca + ' · ' + payload.hora + ' · destaque: ' + destaque;
-  document.getElementById('success-area').style.display = 'block';
-}
-function novoEnvio() {
-  document.getElementById('success-area').style.display = 'none';
-  document.getElementById('form-area').style.display = 'block';
-  document.getElementById('btn-enviar').disabled = false;
-  document.getElementById('btn-enviar').textContent = 'Enviar';
-  document.getElementById('praca').value = '';
-  document.getElementById('assuntos').value = '';
-  document.getElementById('destaque').value = '';
-  document.getElementById('delicado').value = '';
-}
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyzJHIiIK3QPPpOyoMmkNJXGPaXhF6JYA9BvD8XXXViwBcjiW4adhfDmMvZ6umYUno8MQ/exec';
+
+  const dias  = ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'];
+  const meses = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+  const now   = new Date();
+  document.getElementById('data-hoje').textContent =
+    dias[now.getDay()] + ', ' + now.getDate() + ' de ' + meses[now.getMonth()] + ' de ' + now.getFullYear();
+
+  async function enviar() {
+    const praca      = document.getElementById('praca').value.trim();
+    const assuntos   = document.getElementById('assuntos').value.trim();
+    const destaque   = document.getElementById('destaque').value.trim();
+    const delicado   = document.getElementById('delicado').value.trim();
+    const observacao = document.getElementById('observacao').value.trim();
+    const erro       = document.getElementById('error-msg');
+
+    if (!praca || !assuntos || !destaque) { erro.style.display = 'block'; return; }
+    erro.style.display = 'none';
+
+    const btn = document.getElementById('btn-enviar');
+    btn.disabled    = true;
+    btn.textContent = 'Enviando...';
+
+    const payload = {
+      data:      now.toLocaleDateString('pt-BR'),
+      hora:      now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+      praca, assuntos, destaque,
+      delicado:   delicado   || '—',
+      observacao: observacao || '—'
+    };
+
+    try {
+      await fetch(APPS_SCRIPT_URL, {
+        method: 'POST', mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    } catch(e) {}
+
+    document.getElementById('form-area').style.display = 'none';
+    document.getElementById('success-detalhe').innerHTML =
+      '<strong>Praça:</strong> ' + praca + '<br>' +
+      '<strong>Destaque:</strong> ' + destaque + '<br>' +
+      '<strong>Horário:</strong> ' + payload.hora;
+    document.getElementById('success-area').style.display = 'block';
+  }
+
+  function novoEnvio() {
+    document.getElementById('success-area').style.display = 'none';
+    document.getElementById('form-area').style.display    = 'block';
+    document.getElementById('btn-enviar').disabled        = false;
+    document.getElementById('btn-enviar').textContent     = 'Enviar';
+    document.getElementById('praca').value      = '';
+    document.getElementById('assuntos').value   = '';
+    document.getElementById('destaque').value   = '';
+    document.getElementById('delicado').value   = '';
+    document.getElementById('observacao').value = '';
+  }
 </script>
 </body>
 </html>

@@ -3,132 +3,158 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Painel do coordenador — 7 Praças</title>
+<title>Painel do coordenador — RPC Meio Dia Paraná</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f3; min-height: 100vh; padding: 24px 16px 48px; color: #1a1a1a; }
-  .header { max-width: 900px; margin: 0 auto 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
-  .header h1 { font-size: 20px; font-weight: 600; }
-  .header .meta { font-size: 13px; color: #888; }
-  .card { background: #fff; border-radius: 16px; padding: 24px; max-width: 900px; margin: 0 auto 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
-  .card h2 { font-size: 15px; font-weight: 600; margin-bottom: 14px; color: #111; }
-  .config-card { background: #fff8e1; border: 1.5px solid #f0c040; border-radius: 16px; padding: 20px 24px; max-width: 900px; margin: 0 auto 16px; }
-  .config-card h2 { font-size: 15px; font-weight: 600; color: #5a3800; margin-bottom: 6px; }
-  .config-card p { font-size: 13px; color: #7a5000; margin-bottom: 12px; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0057A8; min-height: 100vh; padding: 0 0 48px; color: #1a1a1a; }
+
+  .header { background: #0057A8; padding: 32px 24px 36px; text-align: center; }
+  .header .marca { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 6px; }
+  .header .programa { font-size: 24px; font-weight: 700; color: #fff; letter-spacing: 0.01em; }
+  .header .subtitulo { font-size: 14px; color: rgba(255,255,255,0.7); margin-top: 4px; font-weight: 500; }
+  .header .data { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 4px; }
+
+  .body-wrap { background: #fff; border-radius: 20px 20px 0 0; max-width: 960px; margin: 0 auto; padding: 28px 24px 48px; min-height: calc(100vh - 148px); }
+
+  .section { margin-bottom: 28px; }
+  .section-title { font-size: 15px; font-weight: 700; color: #0057A8; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1.5px solid #e8f0fb; }
+
+  .config-box { background: #fff8e1; border: 1.5px solid #f0c040; border-radius: 12px; padding: 16px 18px; margin-bottom: 28px; }
+  .config-box p { font-size: 13px; color: #7a5000; margin-bottom: 10px; }
   .url-row { display: flex; gap: 8px; align-items: center; }
-  .url-row input { flex: 1; padding: 10px 12px; border: 1px solid #f0a500; border-radius: 8px; font-size: 13px; font-family: monospace; background: #fff; color: #1a1a1a; outline: none; }
+  .url-row input { flex: 1; padding: 10px 12px; border: 1.5px solid #f0a500; border-radius: 8px; font-size: 13px; font-family: monospace; background: #fff; color: #1a1a1a; outline: none; }
   .url-row input:focus { border-color: #c07800; }
-  .salvar-btn { padding: 10px 18px; background: #f0a500; color: #fff; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+  .salvar-btn { padding: 10px 18px; background: #f0a500; color: #fff; border: none; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap; }
   .salvar-btn:hover { background: #c07800; }
-  .config-status { font-size: 12px; margin-top: 8px; min-height: 18px; }
+  .config-status { font-size: 12px; margin-top: 8px; min-height: 16px; }
   .config-status.ok { color: #1a7a4a; }
   .config-status.err { color: #c00; }
+
   .filtro-row { display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap; }
   .filtro-row .field { flex: 1; min-width: 160px; }
-  .filtro-row label { display: block; font-size: 12px; color: #666; margin-bottom: 5px; font-weight: 500; }
-  input[type="date"] { width: 100%; padding: 9px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; font-family: inherit; background: #fff; color: #111; outline: none; }
-  input[type="date"]:focus { border-color: #555; }
-  .btn { padding: 10px 18px; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap; }
-  .btn-primary { background: #1a1a1a; color: #fff; }
-  .btn-primary:hover { background: #333; }
+  .filtro-row label { display: block; font-size: 12px; font-weight: 700; color: #0057A8; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+  input[type="date"] { width: 100%; padding: 11px 14px; border: 1.5px solid #dde3ed; border-radius: 10px; font-size: 14px; font-family: inherit; background: #f8fafd; color: #111; outline: none; }
+  input[type="date"]:focus { border-color: #0057A8; background: #fff; }
+
+  .btn { padding: 11px 20px; border: none; border-radius: 10px; font-size: 14px; font-weight: 700; cursor: pointer; white-space: nowrap; transition: background 0.15s; }
+  .btn-primary { background: #0057A8; color: #fff; }
+  .btn-primary:hover { background: #004490; }
   .btn-primary:disabled { background: #ccc; cursor: not-allowed; }
-  .btn-secondary { background: #f0f0ee; color: #444; }
-  .btn-secondary:hover { background: #e4e4e2; }
-  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
-  .stat { background: #f5f5f3; border-radius: 10px; padding: 14px 16px; }
-  .stat-label { font-size: 12px; color: #888; margin-bottom: 4px; }
-  .stat-val { font-size: 24px; font-weight: 600; }
+  .btn-secondary { background: #f0f6ff; color: #0057A8; }
+  .btn-secondary:hover { background: #ddeeff; }
+
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 18px; }
+  .stat { background: #f0f6ff; border-radius: 10px; padding: 14px 16px; }
+  .stat-label { font-size: 12px; color: #0057A8; margin-bottom: 4px; font-weight: 500; }
+  .stat-val { font-size: 26px; font-weight: 700; }
   .ok { color: #1a7a4a; } .warn { color: #a06000; } .danger { color: #b00020; }
+
   .table-wrap { overflow-x: auto; }
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  th { text-align: left; padding: 8px 10px; font-size: 11px; font-weight: 600; color: #888; border-bottom: 1px solid #eee; white-space: nowrap; }
-  td { padding: 9px 10px; border-bottom: 1px solid #f0f0ee; vertical-align: top; line-height: 1.5; }
+  th { text-align: left; padding: 8px 10px; font-size: 11px; font-weight: 700; color: #0057A8; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1.5px solid #e8f0fb; white-space: nowrap; }
+  td { padding: 10px 10px; border-bottom: 1px solid #f0f4fb; vertical-align: top; line-height: 1.5; }
   tr:last-child td { border-bottom: none; }
-  .badge { display: inline-block; font-size: 10px; padding: 2px 7px; border-radius: 4px; font-weight: 600; white-space: nowrap; }
+  .badge { display: inline-block; font-size: 10px; padding: 2px 7px; border-radius: 4px; font-weight: 700; white-space: nowrap; }
   .b-del { background: #fff3e0; color: #a06000; }
   .b-none { background: #f0f0ee; color: #999; }
-  .relatorio-box { background: #f9f9f7; border-radius: 10px; padding: 18px; font-size: 14px; line-height: 1.8; white-space: pre-wrap; min-height: 60px; color: #111; }
+
+  .relatorio-box { background: #f8fafd; border: 1.5px solid #dde3ed; border-radius: 12px; padding: 18px; font-size: 14px; line-height: 1.8; white-space: pre-wrap; min-height: 60px; color: #111; }
   .relatorio-actions { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
-  .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
-  .section-header h2 { margin: 0; }
+  .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1.5px solid #e8f0fb; }
+  .section-header .section-title { margin: 0; padding: 0; border: none; }
+
   .loading { display: none; align-items: center; gap: 8px; font-size: 13px; color: #888; padding: 12px 0; }
-  .dot { width: 6px; height: 6px; border-radius: 50%; background: #aaa; animation: pulse 1s infinite; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: #0057A8; animation: pulse 1s infinite; }
   .dot:nth-child(2) { animation-delay: .2s; }
   .dot:nth-child(3) { animation-delay: .4s; }
-  @keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:1} }
+  @keyframes pulse { 0%,100%{opacity:.2} 50%{opacity:1} }
+
   .historico-list { display: flex; flex-direction: column; gap: 8px; }
-  .hist-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #f9f9f7; border-radius: 8px; font-size: 13px; cursor: pointer; }
-  .hist-item:hover { background: #f0f0ee; }
-  .hist-data { font-weight: 500; }
-  .hist-meta { color: #888; font-size: 12px; }
+  .hist-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: #f8fafd; border: 1px solid #e8f0fb; border-radius: 10px; font-size: 13px; cursor: pointer; }
+  .hist-item:hover { background: #f0f6ff; }
+  .hist-data { font-weight: 600; color: #0057A8; }
+  .hist-meta { color: #888; font-size: 12px; margin-top: 2px; }
   .empty { text-align: center; padding: 24px; color: #aaa; font-size: 13px; }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <h1>Painel do coordenador — 7 Praças</h1>
-  <span class="meta" id="data-atual"></span>
+  <div class="marca">RPC</div>
+  <div class="programa">Meio Dia Paraná</div>
+  <div class="subtitulo">Painel do coordenador</div>
+  <div class="data" id="data-atual"></div>
 </div>
 
-<div class="config-card">
-  <h2>⚙ URL do Google Apps Script</h2>
-  <p>Cole aqui a URL gerada ao publicar o script. Você pode atualizar a qualquer momento.</p>
-  <div class="url-row">
-    <input type="text" id="url-input" placeholder="https://script.google.com/macros/s/.../exec">
-    <button class="salvar-btn" onclick="salvarUrl()">Salvar</button>
-  </div>
-  <div class="config-status" id="config-status"></div>
-</div>
+<div class="body-wrap">
 
-<div class="card">
-  <h2>Carregar respostas do dia</h2>
-  <div class="filtro-row">
-    <div class="field">
-      <label>Data</label>
-      <input type="date" id="data-filtro">
+  <div class="config-box">
+    <p>⚙ Cole aqui a URL do Google Apps Script. Você só precisa fazer isso uma vez.</p>
+    <div class="url-row">
+      <input type="text" id="url-input" placeholder="https://script.google.com/macros/s/.../exec">
+      <button class="salvar-btn" onclick="salvarUrl()">Salvar</button>
     </div>
-    <button class="btn btn-primary" onclick="buscarDados()">Carregar respostas</button>
+    <div class="config-status" id="config-status"></div>
   </div>
-</div>
 
-<div class="card" id="card-resumo" style="display:none">
-  <h2>Resumo do dia</h2>
-  <div class="stats">
-    <div class="stat"><div class="stat-label">Responderam</div><div class="stat-val ok" id="st-ok">—</div></div>
-    <div class="stat"><div class="stat-label">Sem retorno</div><div class="stat-val danger" id="st-sem">—</div></div>
-    <div class="stat"><div class="stat-label">Assuntos delicados</div><div class="stat-val warn" id="st-del">—</div></div>
+  <div class="section">
+    <div class="section-title">Carregar respostas do dia</div>
+    <div class="filtro-row">
+      <div class="field">
+        <label>Data</label>
+        <input type="date" id="data-filtro">
+      </div>
+      <button class="btn btn-primary" onclick="buscarDados()">Carregar respostas</button>
+    </div>
   </div>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>Praça</th><th>Destaque</th><th>Assuntos</th><th>Delicado</th><th>Observação</th></tr></thead>
-      <tbody id="tabela-body"></tbody>
-    </table>
-  </div>
-</div>
 
-<div class="card" id="card-relatorio" style="display:none">
-  <div class="section-header">
-    <h2>Mini relatório — IA</h2>
-    <button class="btn btn-primary" id="btn-gerar" onclick="gerarRelatorio()">Gerar relatório</button>
+  <div class="section" id="section-resumo" style="display:none">
+    <div class="section-title">Resumo do dia</div>
+    <div class="stats">
+      <div class="stat"><div class="stat-label">Responderam</div><div class="stat-val ok" id="st-ok">—</div></div>
+      <div class="stat"><div class="stat-label">Sem retorno</div><div class="stat-val danger" id="st-sem">—</div></div>
+      <div class="stat"><div class="stat-label">Assuntos delicados</div><div class="stat-val warn" id="st-del">—</div></div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Praça</th>
+            <th>Destaque</th>
+            <th>Assuntos</th>
+            <th>Delicado</th>
+            <th>Observação</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-body"></tbody>
+      </table>
+    </div>
   </div>
-  <div class="loading" id="loading">
-    <div class="dot"></div><div class="dot"></div><div class="dot"></div>
-    <span>Gerando relatório editorial...</span>
-  </div>
-  <div class="relatorio-box" id="relatorio-box">Clique em "Gerar relatório" após carregar as respostas.</div>
-  <div class="relatorio-actions" id="rel-actions" style="display:none">
-    <button class="btn btn-secondary" onclick="copiar()">Copiar texto</button>
-    <button class="btn btn-secondary" onclick="salvarRelatorio()">Salvar no histórico</button>
-  </div>
-</div>
 
-<div class="card">
-  <div class="section-header">
-    <h2>Histórico de relatórios salvos</h2>
-    <button class="btn btn-secondary" onclick="limparHistorico()">Limpar</button>
+  <div class="section" id="section-relatorio" style="display:none">
+    <div class="section-header">
+      <div class="section-title">Mini relatório — IA</div>
+      <button class="btn btn-primary" id="btn-gerar" onclick="gerarRelatorio()">Gerar relatório</button>
+    </div>
+    <div class="loading" id="loading">
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <span>Gerando relatório editorial...</span>
+    </div>
+    <div class="relatorio-box" id="relatorio-box">Clique em "Gerar relatório" após carregar as respostas.</div>
+    <div class="relatorio-actions" id="rel-actions" style="display:none">
+      <button class="btn btn-secondary" onclick="copiar()">Copiar texto</button>
+      <button class="btn btn-secondary" onclick="salvarRelatorio()">Salvar no histórico</button>
+    </div>
   </div>
-  <div class="historico-list" id="historico-list"></div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Histórico de relatórios salvos</div>
+      <button class="btn btn-secondary" onclick="limparHistorico()">Limpar</button>
+    </div>
+    <div class="historico-list" id="historico-list"></div>
+  </div>
+
 </div>
 
 <script>
@@ -137,14 +163,16 @@ let dadosHoje = [];
 let ultimoRelatorio = '';
 
 const hoje = new Date();
+const dias  = ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'];
+const meses = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
 document.getElementById('data-filtro').value = hoje.toISOString().split('T')[0];
 document.getElementById('data-atual').textContent =
-  hoje.toLocaleDateString('pt-BR', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' });
+  dias[hoje.getDay()] + ', ' + hoje.getDate() + ' de ' + meses[hoje.getMonth()] + ' de ' + hoje.getFullYear();
 
 const urlSalva = localStorage.getItem('apps_script_url');
 if (urlSalva) {
   document.getElementById('url-input').value = urlSalva;
-  document.getElementById('config-status').textContent = '✓ URL configurada';
+  document.getElementById('config-status').textContent = 'URL configurada';
   document.getElementById('config-status').className = 'config-status ok';
 }
 
@@ -154,12 +182,12 @@ function salvarUrl() {
   const url = document.getElementById('url-input').value.trim();
   const status = document.getElementById('config-status');
   if (!url.startsWith('https://script.google.com')) {
-    status.textContent = '✗ URL inválida.';
+    status.textContent = 'URL inválida.';
     status.className = 'config-status err';
     return;
   }
   localStorage.setItem('apps_script_url', url);
-  status.textContent = '✓ URL salva com sucesso!';
+  status.textContent = 'URL salva com sucesso!';
   status.className = 'config-status ok';
 }
 
@@ -191,18 +219,22 @@ function renderTabela(registros, dataFiltro) {
     tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:#aaa;padding:20px">Nenhuma resposta para ' + dataFiltro + '</td></tr>';
   } else {
     tbody.innerHTML =
-      registros.map(r => '<tr>' +
+      registros.map(r =>
+        '<tr>' +
         '<td><strong>' + r.praca + '</strong></td>' +
         '<td>' + r.destaque + '</td>' +
         '<td style="color:#555">' + (r.assuntos||'').replace(/\n/g,'<br>') + '</td>' +
-        '<td>' + (r.delicado && r.delicado !== '—' ? '<span class="badge b-del">⚠ ' + r.delicado + '</span>' : '<span class="badge b-none">—</span>') + '</td>' +
+        '<td>' + (r.delicado && r.delicado !== '—' ? '<span class="badge b-del"> ' + r.delicado + '</span>' : '<span class="badge b-none">—</span>') + '</td>' +
         '<td style="color:#555">' + (r.observacao && r.observacao !== '—' ? r.observacao : '—') + '</td>' +
-        '</tr>').join('')
-      + semRetorno.map(p => '<tr style="opacity:.45"><td><strong>' + p + '</strong></td><td colspan="4" style="color:#c00;font-size:12px">Sem retorno</td></tr>').join('');
+        '</tr>'
+      ).join('')
+      + semRetorno.map(p =>
+        '<tr style="opacity:.45"><td><strong>' + p + '</strong></td><td colspan="4" style="color:#c00;font-size:12px">Sem retorno</td></tr>'
+      ).join('');
   }
 
-  document.getElementById('card-resumo').style.display = 'block';
-  document.getElementById('card-relatorio').style.display = 'block';
+  document.getElementById('section-resumo').style.display = 'block';
+  document.getElementById('section-relatorio').style.display = 'block';
 }
 
 async function gerarRelatorio() {
@@ -213,10 +245,10 @@ async function gerarRelatorio() {
 
   const ausentes = PRACAS.filter(p => !dadosHoje.find(r => r.praca === p));
   const dados = dadosHoje.map(r =>
-    'PRAÇA: ' + r.praca + '\nASSUNTOS: ' + r.assuntos + '\nDESTAQUE: ' + r.destaque + '\nASSUNTO DELICADO: ' + (r.delicado || 'nenhum') + '\nOBSERVAÇÃO: ' + (r.observacao || '—')
+    'PRACA: ' + r.praca + '\nASSUNTOS: ' + r.assuntos + '\nDESTAQUE: ' + r.destaque + '\nASSUNTO DELICADO: ' + (r.delicado || 'nenhum') + '\nOBSERVACAO: ' + (r.observacao || '-')
   ).join('\n\n---\n\n');
 
-  const prompt = 'Você é coordenador editorial de uma rede de TV aberta com 7 emissoras no Paraná (Ponta Grossa, Maringá, Londrina, Noroeste, Cascavel, Foz do Iguaçu e Guarapuava). Recebi os dados matinais das praças abaixo e preciso de um mini relatório antes da reunião do MD às 8h40.\n\n' + (dados || '(nenhum dado recebido ainda)') + (ausentes.length ? '\n\nPRAÇAS SEM RETORNO: ' + ausentes.join(', ') : '') + '\n\nGere o mini relatório com exatamente estas seções:\n\nPANORAMA DO DIA\n(2-3 linhas sobre o conjunto de pautas, tom editorial geral)\n\nDESTAQUES POR PRAÇA\n(uma linha por praça: praça → destaque principal)\n\nASSUNTOS DELICADOS\n(liste cada um com o cuidado editorial recomendado; se não houver, escreva "Nenhum identificado.")\n\nPAUTAS TRANSVERSAIS\n(assuntos que aparecem em mais de uma praça ou que conectam regiões)\n\nALERTA\n(praças sem retorno ou pontos críticos de produção)\n\nLinguagem direta, jornalística. Sem introdução. Máximo 300 palavras.';
+  const prompt = 'Voce e coordenador editorial de uma rede de TV aberta com 7 emissoras no Parana (Ponta Grossa, Maringa, Londrina, Noroeste, Cascavel, Foz do Iguacu e Guarapuava). Recebi os dados matinais das pracas abaixo e preciso de um mini relatorio antes da reuniao do MD as 8h40.\n\n' + (dados || '(nenhum dado recebido ainda)') + (ausentes.length ? '\n\nPRACAS SEM RETORNO: ' + ausentes.join(', ') : '') + '\n\nGere o mini relatorio com exatamente estas secoes:\n\nPANORAMA DO DIA\n(2-3 linhas sobre o conjunto de pautas, tom editorial geral)\n\nDESTAQUES POR PRACA\n(uma linha por praca: praca - destaque principal)\n\nASSUNTOS DELICADOS\n(liste cada um com o cuidado editorial recomendado; se nao houver, escreva Nenhum identificado.)\n\nPAUTAS TRANSVERSAIS\n(assuntos que aparecem em mais de uma praca ou que conectam regioes)\n\nALERTA\n(pracas sem retorno ou pontos criticos de producao)\n\nLinguagem direta, jornalistica. Sem introducao. Maximo 300 palavras.';
 
   try {
     const res = await fetch('https://api.anthropic.com/v1/messages', {
@@ -225,11 +257,11 @@ async function gerarRelatorio() {
       body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 1000, messages: [{ role: 'user', content: prompt }] })
     });
     const data = await res.json();
-    ultimoRelatorio = (data.content && data.content.find(b => b.type === 'text') && data.content.find(b => b.type === 'text').text) || 'Erro ao gerar.';
+    ultimoRelatorio = (data.content && data.content.find(function(b){return b.type==='text';}) && data.content.find(function(b){return b.type==='text';}).text) || 'Erro ao gerar.';
     document.getElementById('relatorio-box').textContent = ultimoRelatorio;
     document.getElementById('rel-actions').style.display = 'flex';
   } catch(e) {
-    document.getElementById('relatorio-box').textContent = 'Erro de conexão.';
+    document.getElementById('relatorio-box').textContent = 'Erro de conexao.';
   }
 
   document.getElementById('loading').style.display = 'none';
@@ -237,38 +269,38 @@ async function gerarRelatorio() {
 }
 
 function copiar() {
-  navigator.clipboard.writeText(ultimoRelatorio).then(() => alert('Copiado!')).catch(() => {});
+  navigator.clipboard.writeText(ultimoRelatorio).then(function(){ alert('Copiado!'); }).catch(function(){});
 }
 
 function salvarRelatorio() {
   if (!ultimoRelatorio) return;
   const historico = JSON.parse(localStorage.getItem('relatorios') || '[]');
   const data = document.getElementById('data-filtro').value.split('-').reverse().join('/');
-  historico.unshift({ data, pracas: dadosHoje.length, texto: ultimoRelatorio, ts: Date.now() });
+  historico.unshift({ data: data, pracas: dadosHoje.length, texto: ultimoRelatorio, ts: Date.now() });
   localStorage.setItem('relatorios', JSON.stringify(historico.slice(0, 60)));
   renderHistorico();
-  alert('Relatório salvo!');
+  alert('Relatorio salvo!');
 }
 
 function renderHistorico() {
   const historico = JSON.parse(localStorage.getItem('relatorios') || '[]');
   const el = document.getElementById('historico-list');
   if (!historico.length) { el.innerHTML = '<div class="empty">Nenhum relatório salvo ainda.</div>'; return; }
-  el.innerHTML = historico.map((r, i) =>
-    '<div class="hist-item" onclick="verRelatorio(' + i + ')">' +
-    '<div><div class="hist-data">' + r.data + '</div>' +
-    '<div class="hist-meta">' + r.pracas + ' praças responderam · clique para ver</div></div>' +
-    '<span style="color:#bbb;font-size:18px">›</span></div>'
-  ).join('');
+  el.innerHTML = historico.map(function(r, i) {
+    return '<div class="hist-item" onclick="verRelatorio(' + i + ')">' +
+      '<div><div class="hist-data">' + r.data + '</div>' +
+      '<div class="hist-meta">' + r.pracas + ' praças responderam · clique para ver</div></div>' +
+      '<span style="color:#0057A8;font-size:18px">›</span></div>';
+  }).join('');
 }
 
 function verRelatorio(i) {
   const historico = JSON.parse(localStorage.getItem('relatorios') || '[]');
   ultimoRelatorio = historico[i].texto;
   document.getElementById('relatorio-box').textContent = ultimoRelatorio;
-  document.getElementById('card-relatorio').style.display = 'block';
+  document.getElementById('section-relatorio').style.display = 'block';
   document.getElementById('rel-actions').style.display = 'flex';
-  document.getElementById('card-relatorio').scrollIntoView({ behavior: 'smooth' });
+  document.getElementById('section-relatorio').scrollIntoView({ behavior: 'smooth' });
 }
 
 function limparHistorico() {

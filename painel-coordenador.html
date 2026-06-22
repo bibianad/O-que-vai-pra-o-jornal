@@ -7,18 +7,14 @@
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0057A8; min-height: 100vh; padding: 0 0 48px; color: #1a1a1a; }
-
   .header { background: #0057A8; padding: 32px 24px 36px; text-align: center; }
   .header .marca { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 6px; }
   .header .programa { font-size: 24px; font-weight: 700; color: #fff; letter-spacing: 0.01em; }
   .header .subtitulo { font-size: 14px; color: rgba(255,255,255,0.7); margin-top: 4px; font-weight: 500; }
   .header .data { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 4px; }
-
   .body-wrap { background: #fff; border-radius: 20px 20px 0 0; max-width: 960px; margin: 0 auto; padding: 28px 24px 48px; min-height: calc(100vh - 148px); }
-
   .section { margin-bottom: 28px; }
   .section-title { font-size: 15px; font-weight: 700; color: #0057A8; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1.5px solid #e8f0fb; }
-
   .config-box { background: #fff8e1; border: 1.5px solid #f0c040; border-radius: 12px; padding: 16px 18px; margin-bottom: 28px; }
   .config-box p { font-size: 13px; color: #7a5000; margin-bottom: 10px; }
   .url-row { display: flex; gap: 8px; align-items: center; }
@@ -29,26 +25,22 @@
   .config-status { font-size: 12px; margin-top: 8px; min-height: 16px; }
   .config-status.ok { color: #1a7a4a; }
   .config-status.err { color: #c00; }
-
   .filtro-row { display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap; }
   .filtro-row .field { flex: 1; min-width: 160px; }
   .filtro-row label { display: block; font-size: 12px; font-weight: 700; color: #0057A8; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
   input[type="date"] { width: 100%; padding: 11px 14px; border: 1.5px solid #dde3ed; border-radius: 10px; font-size: 14px; font-family: inherit; background: #f8fafd; color: #111; outline: none; }
   input[type="date"]:focus { border-color: #0057A8; background: #fff; }
-
   .btn { padding: 11px 20px; border: none; border-radius: 10px; font-size: 14px; font-weight: 700; cursor: pointer; white-space: nowrap; transition: background 0.15s; }
   .btn-primary { background: #0057A8; color: #fff; }
   .btn-primary:hover { background: #004490; }
   .btn-primary:disabled { background: #ccc; cursor: not-allowed; }
   .btn-secondary { background: #f0f6ff; color: #0057A8; }
   .btn-secondary:hover { background: #ddeeff; }
-
   .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 18px; }
   .stat { background: #f0f6ff; border-radius: 10px; padding: 14px 16px; }
   .stat-label { font-size: 12px; color: #0057A8; margin-bottom: 4px; font-weight: 500; }
   .stat-val { font-size: 26px; font-weight: 700; }
   .ok { color: #1a7a4a; } .warn { color: #a06000; } .danger { color: #b00020; }
-
   .table-wrap { overflow-x: auto; }
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
   th { text-align: left; padding: 8px 10px; font-size: 11px; font-weight: 700; color: #0057A8; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1.5px solid #e8f0fb; white-space: nowrap; }
@@ -57,12 +49,10 @@
   .badge { display: inline-block; font-size: 10px; padding: 2px 7px; border-radius: 4px; font-weight: 700; white-space: nowrap; }
   .b-del { background: #fff3e0; color: #a06000; }
   .b-none { background: #f0f0ee; color: #999; }
-
   .whats-box { background: #f0fff6; border: 1.5px solid #aaddbb; border-radius: 12px; padding: 18px; font-size: 14px; line-height: 1.8; white-space: pre-wrap; min-height: 80px; color: #111; font-family: monospace; }
   .relatorio-actions { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
   .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1.5px solid #e8f0fb; }
   .section-header .section-title { margin: 0; padding: 0; border: none; }
-
   .historico-list { display: flex; flex-direction: column; gap: 8px; }
   .hist-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: #f8fafd; border: 1px solid #e8f0fb; border-radius: 10px; font-size: 13px; cursor: pointer; }
   .hist-item:hover { background: #f0f6ff; }
@@ -118,6 +108,7 @@
             <th>Destaque</th>
             <th>Assuntos</th>
             <th>Delicado</th>
+            <th>Enquete</th>
             <th>Observação</th>
           </tr>
         </thead>
@@ -208,7 +199,7 @@ function renderTabela(registros, dataFiltro) {
   document.getElementById('st-del').textContent = delicados;
 
   if (!registros.length && !semRetorno.length) {
-    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:#aaa;padding:20px">Nenhuma resposta para ' + dataFiltro + '</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:#aaa;padding:20px">Nenhuma resposta para ' + dataFiltro + '</td></tr>';
   } else {
     tbody.innerHTML =
       registros.map(r =>
@@ -217,11 +208,12 @@ function renderTabela(registros, dataFiltro) {
         '<td>' + r.destaque + '</td>' +
         '<td style="color:#555">' + (r.assuntos||'').replace(/\n/g,'<br>') + '</td>' +
         '<td>' + (r.delicado && r.delicado !== '—' ? '<span class="badge b-del">⚠ ' + r.delicado + '</span>' : '<span class="badge b-none">—</span>') + '</td>' +
+        '<td style="color:#555">' + (r.enquete && r.enquete !== '—' ? r.enquete : '—') + '</td>' +
         '<td style="color:#555">' + (r.observacao && r.observacao !== '—' ? r.observacao : '—') + '</td>' +
         '</tr>'
       ).join('')
       + semRetorno.map(p =>
-        '<tr style="opacity:.45"><td><strong>' + p + '</strong></td><td colspan="4" style="color:#c00;font-size:12px">Sem retorno</td></tr>'
+        '<tr style="opacity:.45"><td><strong>' + p + '</strong></td><td colspan="5" style="color:#c00;font-size:12px">Sem retorno</td></tr>'
       ).join('');
   }
 
@@ -249,6 +241,10 @@ function gerarResumoWhats() {
 
     if (r.delicado && r.delicado !== '—') {
       texto += '⚠ Delicado: ' + r.delicado + '\n';
+    }
+
+    if (r.enquete && r.enquete !== '—') {
+      texto += '📊 Enquete: ' + r.enquete + '\n';
     }
 
     if (r.observacao && r.observacao !== '—') {
